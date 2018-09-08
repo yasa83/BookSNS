@@ -5,12 +5,12 @@ session_start();
 $errors = [];
 
 if(!empty($_POST)){
-    $id = $_POST['id'];
+    $email = $_POST['email'];
     $password = $_POST['password'];
 
-    if($id !='' && $password !=''){
-        $sql = 'SELECT * FROM `users` WHERE `users_id`=?';
-        $data = [$id];
+    if($email !='' && $password !=''){
+        $sql = 'SELECT * FROM `users` WHERE `email`=?';
+        $data = [$email];
         $stmt = $dbh->prepare($sql);
         $stmt->execute($data);
         $record = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -18,7 +18,7 @@ if(!empty($_POST)){
         	$errors['signin'] = 'failed';
         }
         if(password_verify($password,$record['password'])){
-        	$_SESSION['id'] = $record['id'];
+        	$_SESSION['email'] = $record['email'];
         	header("Location: home.php");
         	exit();
         }else{
@@ -32,16 +32,14 @@ if(!empty($_POST)){
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <title>Present Box</title>
+    <title>BookSNS</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="images/favicon.png" href="assets/images/favicon.png">
-<link rel="stylesheet" type="text/css" href="assets/css/signin.css">
-<link rel="stylesheet" media="(max-width: 640px)" href="assets/css/mobile.css">
-
-
+    <link rel="stylesheet" type="text/css" href="assets/css/signin.css">
+    <link rel="stylesheet" media="(max-width: 640px)" href="assets/css/mobile.css">
 </head>
-<body background="assets/images/alcohl.jpg">
+<body background="assets/images/bookshelf.jpg">
     <div class="limiter">
         <div class="container-login100" style="">
             <div class="wrap-login100 p-t-30 p-b-50">
@@ -50,13 +48,13 @@ if(!empty($_POST)){
                 </span>
                 <form class="login100-form validate-form p-b-33 p-t-5" method="POST" action="signin.php">
                     <?php if(isset($errors['signin']) && $errors['signin'] == 'blank'): ?>
-                        <p style="margin:30px 5px 5px 80px; color: red;">enter id and password correctly</p>
+                        <p style="margin:30px 5px 5px 80px; color: red;">enter Email and password correctly</p>
                     <?php endif; ?>
                     <?php if(isset($errors['signin']) && $errors['signin'] == 'failed'): ?>
                         <p style="margin:30px 5px 5px 80px; color: red;">failed Login</p>
                     <?php endif; ?>
-                    <div class="wrap-input100 validate-input" data-validate = "Enter username">
-                        <input class="input100" type="text" name="id" placeholder="User ID">
+                    <div class="wrap-input100 validate-input" data-validate = "Enter Email">
+                        <input class="input100" type="text" name="email" placeholder="Email">
                         <span class="focus-input100" data-placeholder="&#xe82a;"></span>
                     </div>
                     <div class="wrap-input100 validate-input" data-validate="Enter password">

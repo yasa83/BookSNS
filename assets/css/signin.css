@@ -381,11 +381,12 @@ padding-bottom: 8px;
   height: 42px;
   border-radius: 21px;
 
-  background: #d41872;
+  background-color: saddlebrown; 
+  /*background: #d41872;
   background: -webkit-linear-gradient(left, #a445b2, #d41872, #fa4299);
   background: -o-linear-gradient(left, #a445b2, #d41872, #fa4299);
   background: -moz-linear-gradient(left, #a445b2, #d41872, #fa4299);
-  background: linear-gradient(left, #a445b2, #d41872, #fa4299);
+  background: linear-gradient(left, #a445b2, #d41872, #fa4299);*/
   position: relative;
   z-index: 1;
 
@@ -415,7 +416,7 @@ padding-bottom: 8px;
 }
 
 .login100-form-btn:hover {
-  background-color: transparent;
+  background-color: saddlebrown;
 }
 
 .login100-form-btn:hover:before {
