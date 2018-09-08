@@ -19,6 +19,22 @@ $signin_user = $stmt->fetch(PDO::FETCH_ASSOC);
 //エラーの初期化
 $errors = array();
 
+// editボタンを押した時に書籍のデータが更新される
+if(!empty($_POST)){
+    // var_dump($_POST['id']);
+    // die();
+    $update_sql = "UPDATE `books` SET `title` = ?,`reason` = ?,`updated` = NOW() WHERE `id` = ? ";
+    $data = array($_POST['title'],$_POST['reason'],$_POST['id']);
+    $stmt = $dbh->prepare($update_sql);
+    $stmt->execute($data);
+
+    // var_dump($_POST['id']);
+    // die();
+
+    header('Location:home.php');
+    exit();
+}
+
 //何ページ目を開いているか決める
 if (isset($_GET['page'])) {
     $page = $_GET['page'];
@@ -154,7 +170,9 @@ while (1) {
                                     <div class="col-md-6" style="font-size: 25px; line-height: 4em;">
                                         <form class="form-group" method="post" action="home.php">
                                             <ul class="text-left" >
+                                                <p>Title</p>
                                                 <li><textarea name="title" class="form-control"><?php echo $book['title']?></textarea></li>
+                                                <p>Detail</p>
                                                 <li><textarea name="reason" class="form-control"><?php echo $book['reason']?></textarea></li>
                                             </ul>
                                             <div class="btn_user">
