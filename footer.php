@@ -4,7 +4,7 @@
             <div class="row copyright">
                 <div class="col-md-12 text-center">
                     <p>
-                        <small class="block">&copy; 43batch チームはしうち　Nexseed<br>
+                        <small class="block">&copy; 43batch Saya Inoue　Nexseed<br>
                         FREEHTML5.CO</small> 
                     </p>
                     <p>
