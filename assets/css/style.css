@@ -1911,8 +1911,8 @@ form label {
 }
 
 .picture-size{
-  width: 380px;
-  height: 300px;
+  width: 300px;
+  height: 400px;
   object-fit: cover;
 }
 

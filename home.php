@@ -141,15 +141,15 @@ while (1) {
                     <?php foreach ($books as $book): ?>
                         <div class="give">
                             <div class="col-xs-4">
-                                <a data-target="book_id" class="modal-open" >
+                                <a data-target="book_<?php $book['id']?>" class="modal-open" >
                                     <img src="book_image/<?php echo $book['img_name']?>" class="picture-size" style="width:300px; height:400px; border-radius: 5%; margin: 10px; ">
                                 </a>
                             </div>
                             <!-- モーダル -->
-                            <div id="book_id" class="modal-content" style="width: 800px; height: 400px;">
+                            <div id="book_<?php $book['id']?>" class="modal-content" style="width: 800px; height: 500px;">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <br><br><img src="book_image/" class="picture-size" style="border-radius: 5%;">
+                                        <br><br><img src="book_image/<?php echo $book['img_name']?>" class="picture-size" style="border-radius: 5%;">
                                     </div>
                                     <div class="col-md-6" style="font-size: 25px; line-height: 4em;">
                                         <form class="form-group" method="post" action="home.php">
