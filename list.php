@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 session_start();
 require('dbconnect.php');
 
@@ -83,7 +83,7 @@ $friends = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
 
-?>
+?> -->
 <!DOCTYPE html>
 <html class="no-js"> 
 <head>

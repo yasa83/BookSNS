@@ -1,93 +1,9 @@
-<?php
-session_start();
-require('dbconnect.php');
-
-//サインインユーザー情報取得
-$sql = 'SELECT * FROM `users` WHERE `id` =?';
-$data = array($_SESSION['id']);
-$stmt = $dbh->prepare($sql);
-$stmt->execute($data);
-
-$signin_user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-
-//友達へのプレゼント登録
-$check = '';
-$present = '';
-$date = '';
-$detail = '';
-
-// list.phpから飛んで来た時データを受け取る
-if(!empty($_GET)){
-    $friend_id = $_GET['id'];
-
-}
-
-$errors = array();
-
-if(!empty($_POST)){
-    $check = $_POST['check'];
-    $present = $_POST['input_present'];
-    $date = $_POST['input_date'];
-    $detail = $_POST['input_detail'];
-    $friend_id = $_POST['friend_id'];
-
-
-    if($check == '' ){
-        $errors['check'] = 'blank';
-    } 
-
-    if($present == ''){
-        $errors['present'] = 'blank';
-    }
-
-    if($date == ''){
-        $errors['date'] = 'blank';
-    }
-
-        // 画像名を取得
-    $file_name = '';
-    if(!isset($_GET['action'])){
-        $file_name = $_FILES['input_img_name']['name'];
-    }
-    if(!empty($file_name)){
-        $file_type = substr($file_name, -4);
-        $file_type = strtolower($file_type);
-        if($file_type != '.jpg' && $file_type !='.png' && $file_type!='.gif' && $file_type!='jpeg'){
-            $errors['img_name'] = 'type';
-        }
-    }else{
-        $errors['img_name']= 'blank';
-    }
-
-    //エラーがなかった時の処理
-    if(empty($errors)){
-        $date_str = date('YmdHis');
-        $submit_file_name = $date_str . $file_name;
-
-        move_uploaded_file($_FILES['input_img_name']['tmp_name'],'present_image/'.$submit_file_name);
-
-
-        $sql = 'INSERT INTO `presents` SET `name` =?, `date`=?, `detail` = ?,`img_name` = ?,`friend_id`= ?, `which` = ?';
-        $data = array($present,$date,$detail,$submit_file_name, $friend_id, $check);
-        $stmt = $dbh->prepare($sql);
-        $stmt->execute($data);
-
-        header('Location: list.php?id=' . $friend_id);
-        exit();
-    }
-}
-
-
-
-?>
-
 <!DOCTYPE html>
 <html class="no-js"> 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Present Box</title>
+    <title>BookSNS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
     <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />

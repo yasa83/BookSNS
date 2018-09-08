@@ -2020,3 +2020,10 @@ input::-webkit-input-placeholder {
 .btn_user{
     text-align: right;
 }
+
+.list{
+  margin-top:50px;
+  font-family: "Sacramento", Arial, serif;
+  font-size: 50px;
+  color: saddlebrown;
+}
