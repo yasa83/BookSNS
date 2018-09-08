@@ -58,7 +58,7 @@ if(!empty($_POST)){
         $date_str = date('YmdHis');
         $submit_file_name = $date_str . $file_name;
 
-        move_uploaded_file($_FILES['input_img_name']['tmp_name'],'present_image/'.$submit_file_name);
+        move_uploaded_file($_FILES['input_img_name']['tmp_name'],'book_image/'.$submit_file_name);
 
 
         $sql = 'INSERT INTO `books` SET `title` =?, `user_id`=?, `reason` = ?,`img_name` = ?, `created` = NOW()';
@@ -121,14 +121,17 @@ if(!empty($_POST)){
                     </div>
                     <div class="form-group">
                         <label for="detail">Detail</label>
-                        <textarea rows="5" cols="80" name="input_reason">Enter your recommended reason</textarea>
+                        <textarea rows="5" cols="80" name="input_reason" placeholder="Enter recommended reason"></textarea>
+                        <?php if(isset($errors['reason'])&& $errors['reason'] == 'blank'): ?>
+                            <p class="text-danger">Enter recommended reason</p>
+                        <?php endif;?>
                     </div>
                     <div class="form-group">
                         <label for="img_name"></label>
                         <input type="file" name="input_img_name" id="image/*"
                         id="img_name">
                         <?php if(isset($errors['img_name'])&& $errors['img_name'] == 'blank'): ?>
-                            <p class="text-danger">enter book's image</p>
+                            <p class="text-danger">Enter book's image</p>
                         <?php endif;?>
                         <?php if(isset($errors['img_name'])&& $errors['img_name'] == 'type'): ?>
                             <p class="text-danger">only 'jpg'.'png','gif' type</p>
