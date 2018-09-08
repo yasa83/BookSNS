@@ -17,7 +17,7 @@
                                         <li><a href="profile.php">my profile</a></li>
                                         <li><a href="signout.php">signout</a></li>
                                     </ul>
-                                    <a href="post.php"><i class="fa fa-heart"></i>Post your recomend</a>
+                                    <a href="post.php"><i class="fa fa-heart"></i>Post book</a>
                                 </li>
                             </ul>
                         </div>

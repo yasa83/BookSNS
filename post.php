@@ -1,3 +1,79 @@
+<?php
+session_start();
+require('dbconnect.php');
+
+// 直接このページに来たらsignin.phpに飛ぶようにする
+if(!isset($_SESSION['email'])){
+    header('Location:signin.php');
+    exit();
+}
+
+//サインインユーザー情報取得
+$sql = 'SELECT * FROM `users` WHERE `email` =?';
+$data = array($_SESSION['email']);
+$stmt = $dbh->prepare($sql);
+$stmt->execute($data);
+
+$signin_user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// エラーの初期化
+$errors = array();
+
+//空の配列を用意
+$title = '';
+$reason = '';
+
+// 登録ボタンを押したときの処理
+if(!empty($_POST)){
+    $title = $_POST['input_title'];
+    $reason = $_POST['input_reason'];
+    $user_id = $signin_user['id'];
+
+
+    if($title == '' ){
+        $errors['title'] = 'blank';
+    } 
+
+    if($reason == ''){
+        $errors['reason'] = 'blank';
+    }
+
+    // 画像名を取得
+    $file_name = '';
+    if(!isset($_GET['action'])){
+        $file_name = $_FILES['input_img_name']['name'];
+    }
+    if(!empty($file_name)){
+        $file_type = substr($file_name, -4);
+        $file_type = strtolower($file_type);
+        if($file_type != '.jpg' && $file_type !='.png' && $file_type!='.gif' && $file_type!='jpeg'){
+            $errors['img_name'] = 'type';
+        }
+    }else{
+        $errors['img_name']= 'blank';
+    }
+
+    //エラーがなかった時の処理
+    if(empty($errors)){
+        $date_str = date('YmdHis');
+        $submit_file_name = $date_str . $file_name;
+
+        move_uploaded_file($_FILES['input_img_name']['tmp_name'],'present_image/'.$submit_file_name);
+
+
+        $sql = 'INSERT INTO `books` SET `title` =?, `user_id`=?, `reason` = ?,`img_name` = ?, `created` = NOW()';
+        $data = array($title,$user_id,$reason,$submit_file_name);
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute($data);
+
+        header('Location: home.php');
+        exit();
+    }
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html class="no-js"> 
 <head>
@@ -5,9 +81,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>BookSNS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
-    <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
-    <meta name="author" content="FREEHTML5.CO" />
+    <meta name="description" content="Free HTML5 Template by FREEHTML5.CO">
+    <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive">
+    <meta name="author" content="FREEHTML5.CO">
     <link rel="icon" type="images/favicon.png" href="assets/images/favicon.png">
     <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Sacramento" rel="stylesheet">
@@ -30,66 +106,44 @@
 <body>
     <?php include('nav-var.php'); ?>
     <!-- ヘッダー始まり -->
-    <header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" style="background-image:url(assets/images/want.jpg);">
+    <header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" style="background-image:url(assets/images/bookshelf.jpg);">
         <div class="overlay"></div>
         <div class="container" style="padding-top:45px;">
             <div class="col-xs-8 col-xs-offset-2 thumbnail">
-                <h2 class="text-center content_header">To present</h2>
-                <form method="POST" action="list_make.php" enctype="multipart/form-data">
+                <h2 class="text-center post">Post recommended book</h2>
+                <form method="POST" action="post.php" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label class="checkbox-inline">
-                            <input type="radio" name="check" value="give" checked="checked">友達にあげたもの
-                        </label>
-                        <label class="checkbox-inline">
-                            <input type="radio" name="check" value="take">友達からもらったもの
-                        </label>
-                        <label class="checkbox-inline">
-                            <input type="radio" name="check" value="want">友達がほしいもの
-                        </label>
-                        <?php if(isset($errors['check']) && $errors['check'] == 'blank'): ?>
-                            <p class="text-danger">Choose one</p>
-                        <?php endif;?>
-                    </div>
-                    <div class="form-group">
-                        <label for="present">Present</label>
-                        <input type="text" name="input_present" class="form-control" value="" placeholder="商品名">
-                        <?php if(isset($errors['present']) && $errors['present'] == 'blank'): ?>
-                            <p class="text-danger">Enter present's name</p>
-                        <?php endif;?>
-                    </div>
-                    <div class="form-group">
-                        <label for="date">date</label>
-                        <input type="date" name="input_date" class="form-control" value="" placeholder="もらった・あげた日付を登録してください">
-                        <?php if(isset($errors['date']) && $errors['date'] == 'blank'): ?>
-                            <p class="text-danger">Enter the date</p>
+                        <label for="book">Book title</label>
+                        <input type="text" name="input_title" class="form-control" placeholder="Enter book title">
+                        <?php if(isset($errors['title']) && $errors['title'] == 'blank'): ?>
+                            <p class="text-danger">Enter book title</p>
                         <?php endif;?>
                     </div>
                     <div class="form-group">
                         <label for="detail">Detail</label>
-                        <input type="text" name="input_detail" class="form-control" rows="10" placeholder="メモを入力してください" value="">
+                        <textarea rows="5" cols="80" name="input_reason">Enter your recommended reason</textarea>
                     </div>
                     <div class="form-group">
                         <label for="img_name"></label>
                         <input type="file" name="input_img_name" id="image/*"
                         id="img_name">
                         <?php if(isset($errors['img_name'])&& $errors['img_name'] == 'blank'): ?>
-                            <p class="text-danger">enter present's image</p>
+                            <p class="text-danger">enter book's image</p>
                         <?php endif;?>
                         <?php if(isset($errors['img_name'])&& $errors['img_name'] == 'type'): ?>
                             <p class="text-danger">only 'jpg'.'png','gif' type</p>
                         <?php endif;?>
                     </div>
-                        <input type="hidden" name="friend_id" value="<?php echo $friend_id; ?>">
                     <br>
                     <ul class="nav navbar-nav navbar-left">
-                        <li class="active"><a href="list.php?id=<?php echo $friend_id;?>" style="margin: 15px,background-color: black;">友達のページに戻る</a></li>
+                        <li class="active"><a href="home.php" style="margin: 15px,background-color: black;">back to list</a></li>
                     </ul>
-                    <input type="submit" class="btn btn-primary" value="登録">
+                    <input type="submit" class="btn btn-primary" value="Post">
                 </form>
             </div>
         </div>
     </header>
-<!-- ヘッダー終わり -->
+    <!-- ヘッダー終わり -->
 
     <?php include('footer.php'); ?>
     <!-- jQuery -->

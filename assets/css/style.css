@@ -1975,7 +1975,7 @@ hr{
 
 .form-group{
     margin-bottom: 15px;
-    margin-top: 50px;
+    margin-top: 10px;
 }
 
 label{
@@ -2025,5 +2025,12 @@ input::-webkit-input-placeholder {
   margin-top:50px;
   font-family: "Sacramento", Arial, serif;
   font-size: 50px;
+  color: saddlebrown;
+}
+
+.post{
+  margin-top:10px;
+  font-family: "Sacramento", Arial, serif;
+  font-size: 40px;
   color: saddlebrown;
 }
