@@ -2038,3 +2038,20 @@ input::-webkit-input-placeholder {
 .nation{
   margin: 30px 20% 10px 20%;
 }
+
+.profile_picture{
+  float:left;
+  height: 300px;
+  width:300px;
+  border-radius: 10%;
+}
+
+.profile{
+  width: 700px;
+  height: 500px;
+}
+
+.users{
+  float: right;
+}
+
