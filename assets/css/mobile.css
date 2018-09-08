@@ -1,0 +1,15 @@
+
+/* スマートフォン用CSS */
+@media screen and (max-width: 640px) {
+ 
+img{
+max-width: 100%;
+height: auto;
+width /***/:auto;
+}
+ 
+/* ここから通常のCSS */
+・・・
+・・・
+ 
+}/* ←CSSの一番最後に記述 */

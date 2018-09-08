@@ -1,0 +1,14 @@
+body,html{
+    height:111%; }
+
+.main-center{
+    padding: 30px 40px;
+}
+
+.form-control { 
+    height:40px;}
+
+.btn.btn-lg{
+    padding: 8px 30px!important;
+}
+
