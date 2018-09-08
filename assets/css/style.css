@@ -1682,8 +1682,8 @@ form label {
   border: 2px solid saddlebrown;
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
-  background: #f366a3 !important;
-  border-color: #f366a3 !important;
+  background: brown !important;
+  border-color: brown !important;
 }
 .btn-primary.btn-outline {
   background: transparent;

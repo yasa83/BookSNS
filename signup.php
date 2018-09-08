@@ -28,10 +28,6 @@ if(!empty($_POST)){
         $errors['email'] = 'blank';
     }
 
-    if($id == ''){
-        $errors['id'] = 'blank';
-    }
-
     $count = strlen($password);
     if($password == ''){
         $errors['password'] = 'blank';
@@ -56,13 +52,13 @@ if(!empty($_POST)){
 
     // 重複チェック
     $sql = 'SELECT * FROM `users` WHERE email = ?';
-    $data = array($id);
+    $data = array($email);
     $stmt = $dbh->prepare($sql);
     $stmt->execute($data);
 
     $hoge = $stmt->fetch(PDO::FETCH_ASSOC);
     if (!empty($hoge)) {
-        $errors['id'] = 'double';
+        $errors['email'] = 'double';
         ;
 
     }
@@ -77,7 +73,6 @@ if(!empty($_POST)){
 
         $_SESSION['register']['name'] = $_POST['users_name'];
         $_SESSION['register']['email'] = $_POST['users_email'];
-        $_SESSION['register']['id'] = $_POST['users_id'];
         $_SESSION['register']['password'] = $_POST['users_password'];
 
         $_SESSION['register']['img_name'] = $submit_file_name;
@@ -132,10 +127,13 @@ if(!empty($_POST)){
                         <div class="cols-sm-10">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                                <input type="email" class="form-control" name="email" id="email"  placeholder="Enter your email adress" value="<?php echo htmlspecialchars($email); ?>">
+                                <input type="email" class="form-control" name="users_email" id="email"  placeholder="Enter your email adress" value="<?php echo htmlspecialchars($email); ?>">
                             </div>
                             <?php if(isset($errors['email']) && $errors['email'] == 'blank'): ?>
                                     <p class="text-danger">Enter your email adress</p>
+                            <?php endif;?>
+                            <?php if(isset($errors['email']) && $errors['email'] == 'double'): ?>
+                                <p class="text-danger">Other user use the id already</p>
                             <?php endif;?>
                         </div>
                     </div>

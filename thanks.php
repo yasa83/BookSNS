@@ -6,8 +6,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/thanks.css">
     <link rel="icon" type="images/favicon.png" href="assets/images/favicon.png">
     <link rel="stylesheet" media="(max-width: 640px)" href="assets/css/mobile.css">
-
-    <title>Present Box</title>
+    <title>BookSNS</title>
 </head>
 <body>
 <div>
