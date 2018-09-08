@@ -5,30 +5,27 @@ date_default_timezone_set('Asia/Manila');
 
 if(isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite'){
     $_POST['users_name'] = $_SESSION['register']['name'];
-    $_POST['users_birthday'] = $_SESSION['register']['birthday'];
-    $_POST['users_id'] = $_SESSION['register']['id'];
+    $_POST['users_email'] = $_SESSION['register']['email'];
     $_POST['users_password'] = $_SESSION['register']['password'];
 
     $errors['rewrite'] = true;
 }
 
 $name = '';
-$birthday = '';
-$id = '';
+$email = '';
 $errors = array();
 
 if(!empty($_POST)){
     $name = $_POST['users_name'];
-    $birthday = $_POST['users_birthday'];
-    $id = $_POST['users_id'];
+    $email = $_POST['users_email'];
     $password = $_POST['users_password'];
 
     if($name == ''){
         $errors['name'] = 'blank';
     }
 
-    if($birthday == ''){
-        $errors['birthday'] = 'blank';
+    if($email == ''){
+        $errors['email'] = 'blank';
     }
 
     if($id == ''){
@@ -58,7 +55,7 @@ if(!empty($_POST)){
     }
 
     // 重複チェック
-    $sql = 'SELECT * FROM `users` WHERE users_id = ?';
+    $sql = 'SELECT * FROM `users` WHERE email = ?';
     $data = array($id);
     $stmt = $dbh->prepare($sql);
     $stmt->execute($data);
@@ -79,7 +76,7 @@ if(!empty($_POST)){
         move_uploaded_file($_FILES['users_img_name']['tmp_name'],'user_profile_image/'.$submit_file_name);
 
         $_SESSION['register']['name'] = $_POST['users_name'];
-        $_SESSION['register']['birthday'] = $_POST['users_birthday'];
+        $_SESSION['register']['email'] = $_POST['users_email'];
         $_SESSION['register']['id'] = $_POST['users_id'];
         $_SESSION['register']['password'] = $_POST['users_password'];
 
@@ -90,11 +87,9 @@ if(!empty($_POST)){
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="images/favicon.png" href="assets/images/favicon.png">
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
@@ -106,15 +101,10 @@ if(!empty($_POST)){
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/signup.css">
-
-<!-- StyleSheet -->
-
-<link rel="stylesheet" media="(max-width: 640px)" href="assets/css/mobile.css">
-
-    <title>Present Box</title>
-
+    <link rel="stylesheet" media="(max-width: 640px)" href="assets/css/mobile.css">
+    <title>BookSNS</title>
 </head>
-<body background="assets/images/alcohl.jpg">
+<body background="assets/images/bookshelf.jpg">
     <div class="container">
         <div class="row main">
             <div class="panel-heading">
@@ -138,30 +128,14 @@ if(!empty($_POST)){
                     </div>
 
                     <div class="form-group">
-                        <label for="birthday" class="cols-sm-2 control-label">Your Birthday</label>
+                        <label for="email" class="cols-sm-2 control-label">Email</label>
                         <div class="cols-sm-10">
                             <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                                <input type="date" class="form-control" name="users_birthday" id="birthday"  placeholder="Enter your Birthday" value="<?php echo htmlspecialchars($birthday); ?>">
+                                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                <input type="email" class="form-control" name="email" id="email"  placeholder="Enter your email adress" value="<?php echo htmlspecialchars($email); ?>">
                             </div>
-                            <?php if(isset($errors['birthday']) && $errors['birthday'] == 'blank'): ?>
-                                    <p class="text-danger">Enter your birthday</p>
-                            <?php endif;?>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="username" class="cols-sm-2 control-label">User ID</label>
-                        <div class="cols-sm-10">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                                <input type="text" class="form-control" name="users_id" id="users_id"  placeholder="Enter your User ID" value="<?php echo htmlspecialchars($id); ?>">
-                            </div>
-                            <?php if(isset($errors['id']) && $errors['id'] == 'blank'): ?>
-                                    <p class="text-danger">Enter your id</p>
-                            <?php endif;?>
-                            <?php if(isset($errors['id']) && $errors['id'] == 'double'): ?>
-                                <p class="text-danger">Other user use the id already</p>
+                            <?php if(isset($errors['email']) && $errors['email'] == 'blank'): ?>
+                                    <p class="text-danger">Enter your email adress</p>
                             <?php endif;?>
                         </div>
                     </div>
@@ -234,7 +208,7 @@ if(!empty($_POST)){
                       }, false);
                     </script>
                     <div class="back">
-                        <a href="index.php" class="btn btn-default"><font color="#F14E95">&laquo;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;back</a></font>
+                        <a href="index.php" class="btn btn-default">&laquo;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;back</a></font>
                     </div>
                 </form>
             </div>
