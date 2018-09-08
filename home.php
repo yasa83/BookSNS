@@ -141,12 +141,12 @@ while (1) {
                     <?php foreach ($books as $book): ?>
                         <div class="give">
                             <div class="col-xs-4">
-                                <a data-target="book_<?php $book['id']?>" class="modal-open" >
+                                <a data-target="book_<?php echo $book['id']?>" class="modal-open" >
                                     <img src="book_image/<?php echo $book['img_name']?>" class="picture-size" style="width:300px; height:400px; border-radius: 5%; margin: 10px; ">
                                 </a>
                             </div>
                             <!-- モーダル -->
-                            <div id="book_<?php $book['id']?>" class="modal-content" style="width: 800px; height: 500px;">
+                            <div id="book_<?php echo $book['id']?>" class="modal-content" style="width: 800px; height: 500px;">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <br><br><img src="book_image/<?php echo $book['img_name']?>" class="picture-size" style="border-radius: 5%;">
@@ -154,17 +154,15 @@ while (1) {
                                     <div class="col-md-6" style="font-size: 25px; line-height: 4em;">
                                         <form class="form-group" method="post" action="home.php">
                                             <ul class="text-left" >
-                                                <li><textarea name="title" class="form-control"></textarea></li>
-                                                <li><textarea name="reason" class="form-control"></textarea></li>
-                                                <li><textarea name="detail" class="form-control"></textarea></li>
+                                                <li><textarea name="title" class="form-control"><?php echo $book['title']?></textarea></li>
+                                                <li><textarea name="reason" class="form-control"><?php echo $book['reason']?></textarea></li>
                                             </ul>
                                             <div class="btn_user">
-                                                <input type="hidden" name="friend_id" value="" >
-                                                <input type="hidden" name="id" value="" >
+                                                <input type="hidden" name="id" value="<?php echo $book['id']?>" >
 
                                                 <input type="submit" class="btn btn-primary" value="edit">
 
-                                                <a onclick="return confilm('ほんとに消すの？');" href="list_delete.php?id=" class="btn btn-danger btn-sm">delete</a>
+                                                <a onclick="return confilm('ほんとに消すの？');" href="book_delete.php?id=<?php echo $book['id']?>" class="btn btn-danger btn-sm">delete</a>
                                             </div>
                                         </form>
                                     </div>
