@@ -12,7 +12,10 @@
                                 <li class="dropdown">
                                     <!-- ユーザーID取得 -->
                                     <span hidden id="signin-user"><? $signin_user['id']; ?></span>
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="background-color: saddlebrown; color: white; "><img src="user_profile_img/<?php echo $signin_user['img_name']; ?>"><?php echo $signin_user['user_name']; ?><span class="caret"></span></a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="background-color: saddlebrown; color: white; ">
+                                        <?php echo $signin_user['user_name']; ?>
+                                        <span class="caret"></span>
+                                    </a>
                                     <ul class="dropdown-menu">
                                         <li><a href="profile.php">my profile</a></li>
                                         <li><a href="signout.php">signout</a></li>
