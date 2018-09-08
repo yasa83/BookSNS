@@ -19,7 +19,7 @@ $signin_user = $stmt->fetch(PDO::FETCH_ASSOC);
 //エラーの初期化
 $errors = array();
 
-// editボタンを押した時に書籍のデータが更新される
+//editボタンを押した時に書籍のデータが更新される
 if(!empty($_POST)){
     // var_dump($_POST['id']);
     // die();
@@ -27,9 +27,6 @@ if(!empty($_POST)){
     $data = array($_POST['title'],$_POST['reason'],$_POST['id']);
     $stmt = $dbh->prepare($update_sql);
     $stmt->execute($data);
-
-    // var_dump($_POST['id']);
-    // die();
 
     header('Location:home.php');
     exit();
@@ -42,7 +39,7 @@ if (isset($_GET['page'])) {
     $page = 1;
 }
 
-// ページネーション
+//9冊ずつ表示し、それを超えたらページネーションできる
 const CONTENT_PER_PAGE = 9;
 
 // -1などのページ数として不正な値を渡された場合の対策
@@ -170,18 +167,18 @@ while (1) {
                                     <div class="col-md-6" style="font-size: 25px; line-height: 4em;">
                                         <form class="form-group" method="post" action="home.php">
                                             <ul class="text-left" >
-                                                <p>Title</p>
+                                                <p>Book Title</p>
                                                 <li><textarea name="title" class="form-control"><?php echo $book['title']?></textarea></li>
                                                 <p>Detail</p>
                                                 <li><textarea name="reason" class="form-control"><?php echo $book['reason']?></textarea></li>
                                             </ul>
+                                            <?php if ($book["user_id"] == $signin_user["id"] ): ?>
                                             <div class="btn_user">
                                                 <input type="hidden" name="id" value="<?php echo $book['id']?>" >
-
                                                 <input type="submit" class="btn btn-primary" value="edit">
-
                                                 <a onclick="return confilm('ほんとに消すの？');" href="book_delete.php?id=<?php echo $book['id']?>" class="btn btn-danger btn-sm">delete</a>
                                             </div>
+                                            <?php endif; ?>
                                         </form>
                                     </div>
                                     <br>
