@@ -43,7 +43,8 @@ if(!empty($_POST)){
     $stmt = $dbh->prepare($update_sql);
     $stmt->execute($data);
 
-    header('Location:signin.php');
+    $_SESSION['email'] = $email;
+    header('Location:home.php');
     exit();
     }
 }
