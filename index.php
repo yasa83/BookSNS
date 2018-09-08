@@ -39,7 +39,7 @@
                     <div class="display-t ">
                         <div class="display-tc animate-box " data-animate-effect="fadeIn" >
                             <h1>BookSNS</h1>
-                            <h2>このwebサイトは、おすすめの書籍を投稿できるSNSです。<br>会員登録したユーザーは自分のおすすめの書籍を投稿でき、他のユーザーのおすすめ書籍を閲覧することができます。<br>「自分が読んだ本を記録したい」「他の人のおすすめ書籍を知りたい」<br>そんなときにぜひ活用して下さい。</h2>
+                            <h2>このwebサイトは、おすすめの書籍を投稿できるSNSです。<br>会員登録したユーザーは自分のおすすめの書籍を投稿でき、<br>さらに他のユーザーのおすすめ書籍を閲覧することができます。<br>「自分が読んだ本を記録したい」「他の人のおすすめ書籍を知りたい」<br>そんなときにぜひ活用して下さい。</h2>
                             <div class=“input-group”>
                                 <div class="row  text-center">
                                     <div class="col-sm-6 text-right" >
@@ -49,68 +49,43 @@
                                         <a href="signin.php" class="btn btn-default btn-sm left" style="font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;signin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                                     </div>
                                 </div>
-
-                         <div class="row"></div>
-   
-   
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </header>
-        <!-- ヘッダー終わり -->
-
-<div class="container">
-    <div class="row">
-        <div class="col-sm-6"></div>
-        <div class="col-sm-6"></div>
-    </div>
-    <div class="row"></div>
-</div>
-
-
-        <!--wrap始まり-->
-
+        </div>
+    </header>
+    <!-- ヘッダー終わり -->
+    <!--wrap始まり-->
     <div id="fh5co-gallery">
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2 text-center fh5co-heading animate-box">
                     <h2>How to use</h2>
-                    <!-- <p>つかいかた</p> -->
                 </div>
             </div>
-
-
- <div class="item">
-  <div class="item-image"><img src="https://source.unsplash.com/400x300/?flower" alt=""></div>
-  <div class="item-text">
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At quisquam iusto tempora vel, quia consequuntur.</p>
-  </div>
-</div>
-<div class="item">
-  <div class="item-image"><img src="https://source.unsplash.com/400x300/?flower" alt=""></div>
-  <div class="item-text">
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At quisquam iusto tempora vel, quia consequuntur.</p>
-  </div>
-</div>
-<div class="item">
-  <div class="item-image"><img src="https://source.unsplash.com/400x300/?flower" alt=""></div>
-  <div class="item-text">
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At quisquam iusto tempora vel, quia consequuntur.</p>
-  </div>
-</div>
-
-
-
-
-
-
-
+            <div class="item">
+              <div class="item-image"><img src="assets/images/signin.png" alt=""></div>
+              <div class="item-text">
+                <p>まずは会員登録をしましょう。会員登録をするには上の「register」をクリックして、ユーザー名、メールアドレスやパスワードを設定します。<br>すでに会員登録がお済みの方は「signin」をクリックしてください。
+                </p>
+            </div>
+            </div>
+            <div class="item">
+              <div class="item-image"><img src="assets/images/home.png" alt=""></div>
+              <div class="item-text">
+                <p>ログインできたら、ユーザーが投稿したおすすめの書籍一覧を見ることができます。<br>書籍の写真をクリックすると、本のタイトル、おすすめの理由も読むことができます。<br>さらにあなたが投稿した書籍のタイトルとおすすめの理由は編集・削除をすることができます。</p>
+            </div>
+            </div>
+            <div class="item">
+              <div class="item-image"><img src="assets/images/search.png" alt=""></div>
+              <div class="item-text">
+                <p>書籍のタイトルを入力すると、絞り込みで検索することができます。</p>
+            </div>
+        </div>
+    </div>
         <!--wrap終わり-->
-
-
-
 <?php include('footer.php'); ?>
 <!-- jQuery -->
 <script src="assets/js/jquery.min.js"></script>
