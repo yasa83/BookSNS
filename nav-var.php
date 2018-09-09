@@ -11,7 +11,7 @@
                             <ul>
                                 <li class="dropdown">
                                     <!-- ユーザーID取得 -->
-                                    <span hidden id="signin-user"><? $signin_user['id']; ?></span>
+                                    <span hidden id="signin-user"><?php echo $signin_user['id']; ?></span>
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="background-color: saddlebrown; color: white; ">
                                         <?php echo $signin_user['user_name']; ?>
                                         <span class="caret"></span>

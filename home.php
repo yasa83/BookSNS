@@ -173,7 +173,7 @@ while (1) {
                                                 <li><textarea name="reason" class="form-control"><?php echo $book['reason']?></textarea></li>
                                             </ul>
                                             <div class="btn_user">
-                                                <span hidden ><?= $book["id"] ?></span>
+                                                <span hidden class="book_id" ><?= $book["id"] ?></span>
                                                 <button class="btn btn-default btn-xs js-like">
                                                 <i class="fa fa-thumbs-up" aria-hidden="true"></i>
                                                 <span>いいね!</span>
