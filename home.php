@@ -164,7 +164,7 @@ while (1) {
                                     <div class="col-md-6">
                                         <br><br><img src="book_image/<?php echo $book['img_name']?>" class="picture-size" style="border-radius: 5%;">
                                     </div>
-                                    <div class="col-md-6" style="font-size: 25px; line-height: 4em;">
+                                    <div class="col-md-6">
                                         <form class="form-group" method="post" action="home.php">
                                             <ul class="text-left" >
                                                 <p>Book Title</p>
@@ -172,6 +172,15 @@ while (1) {
                                                 <p>Detail</p>
                                                 <li><textarea name="reason" class="form-control"><?php echo $book['reason']?></textarea></li>
                                             </ul>
+                                            <div class="btn_user">
+                                                <span hidden ><?= $book["id"] ?></span>
+                                                <button class="btn btn-default btn-xs js-like">
+                                                <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                                                <span>いいね!</span>
+                                                </button>
+                                                <span>いいね数 : </span>
+                                                <span class="like_count">100</span>
+                                            </div>
                                             <?php if ($book["user_id"] == $signin_user["id"] ): ?>
                                             <div class="btn_user">
                                                 <input type="hidden" name="id" value="<?php echo $book['id']?>" >
@@ -227,6 +236,7 @@ while (1) {
 <script src="assets/js/magnific-popup-options.js"></script>
 <!-- Main -->
 <script src="assets/js/main.js"></script>
+<script src="assets/js/app.js"></script>
 
 </body>
 </html>
