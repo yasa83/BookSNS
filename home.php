@@ -80,6 +80,20 @@ while (1) {
         break;
     }
     $books[] = $rec;
+
+    // いいね済みかどうかの確認
+        $like_flg_sql = "SELECT * FROM `likes` WHERE `user_id` = ? AND `book_id` = ?";
+
+        $like_flg_data = [$signin_user['id'], $books["id"]];
+
+        $like_flg_stmt = $dbh->prepare($like_flg_sql);
+        $like_flg_stmt->execute($like_flg_data);
+
+        $is_liked = $like_flg_stmt->fetch(PDO::FETCH_ASSOC);
+
+        // 三項演算子 条件式 ? trueだった場合 : falseだった場合
+        $books["is_liked"] = $is_liked ? true : false;
+
 }
 
 // echo "<pre>";
@@ -174,10 +188,18 @@ while (1) {
                                             </ul>
                                             <div class="btn_user">
                                                 <span hidden class="book_id" ><?= $book["id"] ?></span>
+                                                <?php if ($book['is_liked']): ?>
+                                                <button class="btn btn-default btn-xs js-unlike">
+                                                <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                                                <span>いいねを取り消す</span>
+                                                </button>
+                                                <?php else: ?>
+
                                                 <button class="btn btn-default btn-xs js-like">
                                                 <i class="fa fa-thumbs-up" aria-hidden="true"></i>
                                                 <span>いいね!</span>
                                                 </button>
+                                                 <?php endif; ?>
                                                 <span>いいね数 : </span>
                                                 <span class="like_count">100</span>
                                             </div>
