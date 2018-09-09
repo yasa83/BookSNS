@@ -130,12 +130,12 @@ while (1) {
                         <div class="display-tc animate-box" data-animate-effect="fadeIn">
                             <h1>what book</h1>
                             <h2>do you search?</h2>
-                            <form method="GET" action="" class="navbar-form navbar-center" role="search">
-                                <div class=“input-group”>
-                                <input type=“text” name="search_word" placeholder=“書籍の名前で検索できます“ style="width:300px; height: 30px;">
-                                <span class=“input-group-btn”>
+                            <form method="GET" action="home.php" class="navbar-form navbar-center" role="search">
+                                <div class="input_group">
+                                    <input type=“text” name="search_word" placeholder=“書籍の名前で検索できます“ style="width:300px; height: 30px;">
+                                    <span class=“input-group-btn”>
                                     <button class=“btn"  style="color: saddlebrown;">Search</button>
-                                </span>
+                                    </span>
                                 </div>
                             </form>
                         </div>

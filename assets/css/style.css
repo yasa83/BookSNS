@@ -1872,7 +1872,7 @@ form label {
 .modal-content {
     position:fixed;
     display:none;
-    z-index:2;
+    z-index:10;
     width:50%;
     margin:0;
     padding:10px 20px;
@@ -2054,4 +2054,6 @@ input::-webkit-input-placeholder {
 .users{
   float: right;
 }
+
+
 
