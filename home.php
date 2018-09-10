@@ -81,18 +81,21 @@ while (1) {
     }
     $books[] = $rec;
 
-    // いいね済みかどうかの確認
-        $like_flg_sql = "SELECT * FROM `likes` WHERE `user_id` = ? AND `book_id` = ?";
+    // var_dump($books);
+    // die();
 
-        $like_flg_data = [$signin_user['id'], $books["id"]];
+// いいね済みかどうかの確認
+    $like_flg_sql = 'SELECT * FROM `likes` WHERE `user_id` = ? AND `book_id` = ?';
 
-        $like_flg_stmt = $dbh->prepare($like_flg_sql);
-        $like_flg_stmt->execute($like_flg_data);
+    $like_flg_data = [$signin_user['id'], $books['id'];
 
-        $is_liked = $like_flg_stmt->fetch(PDO::FETCH_ASSOC);
+    $like_flg_stmt = $dbh->prepare($like_flg_sql);
+    $like_flg_stmt->execute($like_flg_data);
 
-        // 三項演算子 条件式 ? trueだった場合 : falseだった場合
-        $books["is_liked"] = $is_liked ? true : false;
+    $is_liked = $like_flg_stmt->fetch(PDO::FETCH_ASSOC);
+
+    // 三項演算子 条件式 ? trueだった場合 : falseだった場合
+    $books["is_liked"] = $is_liked ? true : false;
 
 }
 
