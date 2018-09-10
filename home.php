@@ -87,7 +87,7 @@ while (1) {
 // いいね済みかどうかの確認
     $like_flg_sql = 'SELECT * FROM `likes` WHERE `user_id` = ? AND `book_id` = ?';
 
-    $like_flg_data = [$signin_user['id'], $books['']['id']];
+    $like_flg_data = [$signin_user['id'], $rec['id']];
 
     $like_flg_stmt = $dbh->prepare($like_flg_sql);
     $like_flg_stmt->execute($like_flg_data);
